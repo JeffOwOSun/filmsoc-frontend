@@ -5,6 +5,10 @@ import subprocess
 import sys
 
 def main():
+    '''
+    opens the json configuration file
+    json.loads turns json into a dictionary
+    '''
     config_f = open("js_build.json", "r")
     config = json.loads(config_f.read())
 
@@ -17,12 +21,22 @@ def main():
     compressor = config["yuicompressor"]
 
     for k, v in config["jobs"].iteritems():
+        '''
+        k is a key, which is the name of the target js file, 
+        and v is a value, which will be a list here, since it's denoted using "[]"
+        map() applies the anonymous function denoted by keyword lambda on every term inside v
+        the result is a v list where each item is appended at the beginning with a path
+        '''
         v = map(lambda x: prefix + x, v)
+        '''
+        run the yui compressor with commandline
+        '''
         command = "java -jar pl1 -o pl2 --type js".split(' ')
         command[2] = compressor
         command[4] = k
+        
         print "Processing for %s" % k
-        print "Using: %s" % ' '.join(command)
+        print "Using: %s" % ' '.join(command) #' '.join(command), is to join the command list using ' ' as separators
         sys.stdout.flush()
         p = subprocess.Popen(command, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
 
