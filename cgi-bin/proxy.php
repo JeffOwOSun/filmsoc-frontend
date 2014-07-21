@@ -44,7 +44,7 @@ if (!function_exists('http_parse_headers'))
     }
 }
 
-$url = "dma005.resnet.ust.hk";
+$url = "dml085.resnet.ust.hk";
 $port = "49000";
 $path_prefix = "/film/static/";
 $path = $path_prefix . urldecode($_GET["_escaped_fragment_"]);
