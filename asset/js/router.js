@@ -31,6 +31,7 @@ cr.define('routerManager', function() {
     var vars = query.split('&');
     for (var i = 0; i < vars.length; i++) {
       var pair = vars[i].split('=');
+      //storing key-value pairs of params into params object. Here it basically functions as a dictionary
       params[pair[0]] = decodeURIComponent(pair[1]);
     }
     return params;
@@ -39,16 +40,21 @@ cr.define('routerManager', function() {
   /**
    * Parse the hash and call the registered handler.
    * Call 404 handler if no registered handler found.
+   * The Core of initializing connection
    */
   function parseHash() {
     var hashString = getHash(), query;
+    //find the start of query string
     var q_pos = hashString.indexOf('?');
+    //if there's no query string, null the query object
     if (q_pos === -1) {
       query = {};
     }
     else {
+      //slice off the query string, and parse it into a query dictionary
       query = hashString.slice(q_pos + 1, hashString.length);
       query = parseQueryParams(query);
+      //Get rid of the query part in the hashString
       hashString = hashString.slice(0, q_pos);
     }
     if (hashString.length === 0) {
@@ -57,14 +63,19 @@ cr.define('routerManager', function() {
       this.pushState(this.defaultRouter.url, true);
       return;
     }
+    //append a forward slash to the hashString if there isn't one
     if (hashString[hashString.length - 1] !== '/') {
       hashString = hashString + '/';
     }
     for (var i = 0; i < this.routers.length; i++) {
       var router = this.routers[i];
+      //If hashString matches the RegEx specified by router.re, then...
       if (router.re.test(hashString)) {
         var args;
+        //Passing a function as the second parameter for the replace() makes it execute the function
+        //for every matching substring.
         hashString.replace(router.re, function() {
+          //Calling indexOf as the arguments object, supplying an argument of 0
           var end = Array.prototype.indexOf.call(arguments, 0);
           args = Array.prototype.slice.call(arguments, 1, end);
           for (var i = 0; i < args.length; i++) {
@@ -141,7 +152,7 @@ cr.define('routerManager', function() {
   /**
    * Register a router rule.
    * @param {RegExp} pattern The pattern to be pushed.
-   * @param {bool} isDefault If true, register handler as default.
+   * @param {bool} isDefault If true, register handler as defaultRouter.
    * @param {function} callback The function to call when router accesses.
    */
   function register(pattern, isDefault, callback) {

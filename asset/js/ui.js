@@ -230,7 +230,7 @@ cr.define('cr.ui', function() {
     document.addEventListener('touchstart', listener, true);
     try {
       var ignore = ":hover",
-          orig = /:hover/g,
+          orig = /:hover/g, //a regex, the tailing 'g' stands for 'replace all occurences'
           replace = ".hover";
       for (var i = 0; i < document.styleSheets.length; i++) {
         var sheet = document.styleSheets[i];
@@ -238,7 +238,7 @@ cr.define('cr.ui', function() {
           var rule = sheet.cssRules[j];
           if (rule.type === CSSRule.STYLE_RULE && rule.selectorText.search(ignore) !== -1) {
             rule.selectorText = rule.selectorText.replace(orig, replace);
-          }
+         }
         }
       }
     }

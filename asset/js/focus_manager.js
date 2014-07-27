@@ -108,6 +108,7 @@ cr.define('cr.ui', function() {
     },
 
     /**
+     * Seems to be only called when firsthand focus attempt fail
      * Attempts to focus the appropriate element in the current dialog.
      * @private
      */
