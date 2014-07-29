@@ -146,7 +146,7 @@ cr.define('cr.ui.template', function() {
 
   /**
    * Makes initializations which must hook at the document level.
-   * Load all the templates registered.
+   * Load all the templates registered from the back-end server.
    */
   function globalInitialization() {
     var pending = [],
@@ -176,7 +176,7 @@ cr.define('cr.ui.template', function() {
   }
 
   /**
-   * Register a template.
+   * Register a template. The information provided only serve as leads for globalInitialization to later retrieve contents
    * @param {string} url The relative url to template.
    * @param {function} callback The function to call when the DOM is generated.
    */
@@ -188,7 +188,7 @@ cr.define('cr.ui.template', function() {
   }
 
   /**
-   * Register a template.
+   * Register a template. 
    * @param {RegExp} pattern The pattern to register.
    * @param {function|string} repl The replacement correnspondent to the pattern.
    */

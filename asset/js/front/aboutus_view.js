@@ -32,6 +32,7 @@ cr.define('cr.view.about', function() {
       var aboutus_template = cr.ui.template.render_template('aboutus_template.html');
       cr.ui.replaceContent(aboutus_template, (function(a) {
         cr.ui.changeSelection(name);
+        //name to indicate the current view
         cr.view.name = name;
         document.title = "About Us | Film Society, HKUSTSU";
         routerManager.markTracker();

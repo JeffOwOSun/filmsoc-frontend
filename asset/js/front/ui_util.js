@@ -6,6 +6,7 @@ cr.define('cr.ui', function () {
 
     /**
      * Replace the content of main container.
+     * This method will empty the container first.
      * @param {Function|HTMLElement} repl The new content
      * @param {Function} callback The callback after replacement
      */

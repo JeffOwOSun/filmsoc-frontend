@@ -6,6 +6,11 @@ import sys
 
 def main():
     '''
+    For debugging. Flagging it True will prevent obfuscation
+    '''
+    debugging=True
+    
+    '''
     opens the json configuration file
     json.loads turns json into a dictionary
     '''
@@ -31,9 +36,13 @@ def main():
         '''
         run the yui compressor with commandline
         '''
-        command = "java -jar pl1 -o pl2 --type js".split(' ')
+        command = "java -jar pl1 -o pl2 pl3 --type js".split(' ')
         command[2] = compressor
         command[4] = k
+        if debugging:
+            command[5] = "--nomunge --preserve-semi --disable-optimizations"
+        else:
+            command[5] = ""
         
         print "Processing for %s" % k
         print "Using: %s" % ' '.join(command) #' '.join(command), is to join the command list using ' ' as separators
@@ -74,7 +83,7 @@ def main():
         for ln, line in enumerate(fileinput.input(k, inplace=1)):
             if ln == 0:
                 print header
-            print line,
+            print line
 
 if __name__ == "__main__":
     main()
