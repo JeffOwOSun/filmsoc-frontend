@@ -40,7 +40,7 @@ def main():
         command[2] = compressor
         command[4] = k
         if debugging:
-            command[5] = "--nomunges"
+            command[5] = "--nomunge"
         else:
             command[5] = ""
         
