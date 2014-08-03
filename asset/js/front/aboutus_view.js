@@ -24,6 +24,7 @@ cr.define('cr.view.about', function() {
 
   /**
    * Pre-setup of this view.
+   * Render the wrapper template. replace the content div using cr.ui.replaceContent. A callback modifies the selection of the nav bar.
    * @param {Function} func The real callback function
    * @return {Function} The wrapped function
    */

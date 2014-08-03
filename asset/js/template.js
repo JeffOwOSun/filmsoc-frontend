@@ -81,10 +81,10 @@ cr.define('cr.ui.template', function() {
   }
 
   /**
-   * Render a template.
-   * @param {string} url The relative url to template.
-   * @param {object} param An object containing param for template.
-   * @param {HTMLDivElement} A div of HTML
+   * Render a template. Replace the place holders with correspondent contents specified in param 
+   * @param {string} url The relative url to template. Should be the one registered using cr.ui.template.register
+   * @param {object} param An object acting as a dictionary specifying replacement rules. a (key, value) pair stands for (placeholder, content)
+   * @return {HTMLDivElement} A detached HTML div object containing the rendered template
    */
   function render_template(url, param) {
     var template = templates[url],
