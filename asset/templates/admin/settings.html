@@ -4,6 +4,17 @@
     </header>
     <div class="content">
         <section>
+            <h3>VCD/DVD Library Settings</h3>
+            <div>
+                <label>
+                    <span>Due Date</span>
+                    <input type="date" name="due_date" value="{{model.getField('due_date').value|attr}}">
+                </label>
+                <button type="submit" control="due_date">Submit</button>
+            </div>
+        </section>
+        
+        <section>
         	<h3>Service State</h3>
         	<div>
         		<label>
@@ -36,16 +47,7 @@
                 <button type="submit" control="pst_state">Submit</button>
             </div>
         </section>
-        <section>
-            <h3>VCD/DVD Library Settings</h3>
-            <div>
-                <label>
-                    <span>Due Date</span>
-                    <input type="date" name="due_date" value="{{model.getField('due_date').value|attr}}">
-                </label>
-                <button type="submit" control="due_date">Submit</button>
-            </div>
-        </section>
+        
         <section>
             <h3>Cover Image</h3>
             <div>   

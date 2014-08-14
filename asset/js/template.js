@@ -114,6 +114,7 @@ cr.define('cr.ui.template', function() {
       value = value.trim();
       arg_list = value.split('|');
       if (arg_list[1]) {
+      //apply escapers
         switch(arg_list[1].trim()) {
           case 'safe': escaper = function(value) {return value;}; break;
           case 'attr': escaper = escapeAttr; break;

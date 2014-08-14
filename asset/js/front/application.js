@@ -39,6 +39,9 @@ cr.define('Application', function() {
         user_panel.querySelector('.link-admin').addEventListener('click', function() {
           window.open('admin/');
         });
+        user_panel.querySelector('.link-register').addEventListener('click', function() {
+          window.open('register/');
+        });
         $('header').replaceChild(user_panel, $('user-wrapper'));
         cr.ui.showNotification(ev.recObj.full_name + ', Welcome back!', 'dismiss');
         cr.model.SiteSettings.loadSettings(function() {
