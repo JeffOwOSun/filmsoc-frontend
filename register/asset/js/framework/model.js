@@ -29,7 +29,7 @@ cr.define('cr', function() {
      */
     function APIRequest(model, method, api, force_new) {
         var self=this;
-        var config = {
+        self.config = {
             url: cr.settings.apiBase + model.name + api,
             type: method,
             cache: !force_new,
@@ -44,8 +44,8 @@ cr.define('cr', function() {
                 try {
                 self.success = data.errno === 0;
                 self.data = data;
-                e = new cr.Event((obj.errno === 0) ? 'load' : 'error', false, true);
-                e.recObj = obj
+                var e = new cr.Event((data.errno === 0) ? 'load' : 'error', false, true);
+                e.recObj = data
                 } catch (exception) {
                     self.success = false;
                     self.data = {
@@ -66,7 +66,7 @@ cr.define('cr', function() {
                     errno: jqXHR.status,
                     error: jqXHR.statusText
                 };
-                e = new cr.Event('error', false, true);
+                var e = new cr.Event('error', false, true);
                 e.recObj = {
                     errno: jqXHR.status,
                     error: jqXHR.statusText
@@ -119,7 +119,7 @@ cr.define('cr', function() {
          */
         sendJSON: function(obj) {
             this.config.headers["Content-Type"]="application/json";
-            this.config.data=obj;
+            this.config.data=JSON.stringify(obj);
             $.ajax(this.config);
         }
     });

@@ -1,5 +1,6 @@
 cr.define('cr.view.createMember',function(){
     var inputTemplate = $.templates("#inputTmpl");
+    var modalTemplate = $.templates("#modalTmpl");
 
     var inputs = [
         {
@@ -65,14 +66,14 @@ cr.define('cr.view.createMember',function(){
     function initialize(){
         $("#inputs").html(inputTemplate.render(inputs));
         $('#expire_at').datepicker({
-            format: 'yyyy/mm/dd',
+            format: 'yyyy-mm-dd',
         });
         $("#member_type").change(function(elem){
             var offset={
                 year:0,
                 month:0,
             }
-            switch (elem.val()){
+            switch ($(this).val()){
                 case "Full":
                     offset.year=4;
                     break;
@@ -91,11 +92,32 @@ cr.define('cr.view.createMember',function(){
             }
             var dateObj = new Date();
             dateObj.setYear(dateObj.getFullYear()+offset.year);
-            dateObj.setYear(dateObj.getMonth()+offset.month);
+            dateObj.setMonth(dateObj.getMonth()+offset.month);
             $('#expire_at').datepicker('setValue',dateObj);
         });
-        $("#buttonSubmit").click(function(){
-            var formObj = $("form").serializeObject()
+        
+        //triggers once to fill the date text box
+        $("#member_type").change()
+        
+        $("form").submit(function(){
+            //formArray is for rendering modalTemplate.
+            var formArray = $(this).serializeArray();
+            $("#modalContent").html(modalTemplate.render({
+                title: "Please Confirm the Info Below.",
+                formData: formArray,
+                primaryButton:{
+                    id: "buttonConfirmSubmit",
+                    text: "Submit",
+                },
+            }));
+            $("#buttonConfirmSubmit").click(function(){
+                //formObj is for sending.
+                var formObj = $("form").serializeObject();
+                cr.model.User.post(formObj);
+            });
+            $('#myModal').modal()
+            //prevent default;
+            return false;
         });
     }
     
@@ -105,6 +127,6 @@ cr.define('cr.view.createMember',function(){
 })
 
 
-cr.view.creatMember.initialize();
+cr.view.createMember.initialize();
 
 

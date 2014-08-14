@@ -5,92 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap 101 Template</title>
-
-    <!-- Bootstrap -->
-    <link href="asset/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bootstrap-datepicker -->
-    <link href="asset/css/datepicker.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <form class="form-horizontal">
-      <fieldset>
-
-      <!-- Form Name -->
-      <legend>Member Detail</legend>
-
-      <!-- Text input-->
-      <div id="inputs"></div>
-
-     
-
-      <!-- Button -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="buttonSubmit"></label>
-        <div class="col-md-4">
-          <button id="buttonSubmit" name="buttonSubmit" class="btn btn-default">Submit</button>
-        </div>
-      </div>
-
-      </fieldset>
-    </form>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div id="modalContent">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <script id="modalTmpl" type="text/x-jsrender">
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title">{{:title}}</h4>
-      </div>
-      <div class="modal-body container-fluid">
-      
-        {{for formData}}
-        <label class="col-md-4 control-label" for={{:id}}>{{:label}}</label>  
-        <div class="col-md-4">        
-          <input id={{:id}} name={{:name}} type={{:type}} {{if placeholder}}placeholder={{:placeholder}}{{/if}} {{if maxlength}} maxlength={{:maxlength}}{{/if}} class="form-control input-md" readonly>        
-        </div>
-        {{/for}}
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Reserve </button>
-      </div>
-    </script>
-    
-    <script id="inputTmpl" type="text/x-jsrender">
-      <div class="form-group">
-        <label class="col-md-4 control-label" for={{:id}}>{{:label}}</label>  
-        <div class="col-md-4">
-        {{if isSelect}}
-        <select id="member_type" name="member_type" class="form-control">
-          {{for options}}
-          <option value={{:value}}>{{:text}}</option>
-          {{/for}}
-        </select>
-        {{else}}
-        <input id={{:id}} name={{:name}} type={{:type}} {{if placeholder}}placeholder={{:placeholder}}{{/if}} {{if maxlength}} maxlength={{:maxlength}}{{/if}} class="form-control input-md" required=""/>
-        {{/if}}
-        
-        </div>
-      </div>
-    </script>
-    
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -113,9 +27,133 @@
         };
     </script>
     
+    <!-- Bootstrap -->
+    <link href="asset/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Multi-Modal -->
+    <script>
+        $(document).ready(function() {           
+           $('.modal').on('hidden.bs.modal', function(event) {
+               $(this).removeClass('fv-modal-stack');
+               $('body').data('fv_open_modals', $('body').data('fv_open_modals') - 1);
+           });
+           $('.modal').on('shown.bs.modal', function(event) {
+               // keep track of the number of open modals
+               if (typeof($('body').data('fv_open_modals')) == 'undefined') {
+                   $('body').data('fv_open_modals', 0);
+               }
+
+               // if the z-index of this modal has been set, ignore.
+               if ($(this).hasClass('fv-modal-stack')) {
+                   return;
+               }
+               $(this).addClass('fv-modal-stack');
+               $('body').data('fv_open_modals', $('body').data('fv_open_modals') + 1);
+               $(this).css('z-index', 1040 + (10 * $('body').data('fv_open_modals')));
+               $('.modal-backdrop').not('.fv-modal-stack')
+                   .css('z-index', 1039 + (10 * $('body').data('fv_open_modals')));
+               $('.modal-backdrop').not('fv-modal-stack')
+                   .addClass('fv-modal-stack');
+           });
+        });
+    </script>
+    
+    <!-- Bootstrap-datepicker -->
+    <link href="asset/css/datepicker.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    
+    
+    <div class="container-fluid">
+      <form class="form-horizontal" action="#">
+        <fieldset>
+
+        <!-- Form Name -->
+        <legend>Member Detail</legend>
+
+        <!-- Text input-->
+        <div id="inputs"></div>
+
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="buttonSubmit"></label>
+          <div class="col-md-4">
+            <button id="buttonSubmit" name="buttonSubmit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+
+        </fieldset>
+      </form>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="modalContent">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script id="modalTmpl" type="text/x-jsrender">
+      <div id="alertWrapper"></div>
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">{{:title}}</h4>
+      </div>
+      <div class="modal-body container-fluid">
+        {{for formData}}
+        <div class="row">
+          <label class="col-md-4 control-label" >{{:name}}</label>  
+          <div class="col-md-4">{{:value}}</div>
+        </div>
+        {{/for}}
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id={{:primaryButton.id}} type="button" class="btn btn-primary">{{:primaryButton.text}}</button>
+      </div>
+    </script>
+    
+    <script id="inputTmpl" type="text/x-jsrender">
+      <div class="form-group">
+        <label class="col-md-4 control-label" for={{:id}}>{{:label}}</label>  
+        <div class="col-md-4">
+        {{if isSelect}}
+        <select id="member_type" name="member_type" class="form-control">
+          {{for options}}
+          <option value={{:value}}>{{:text}}</option>
+          {{/for}}
+        </select>
+        {{else}}
+        <input id={{:id}} name={{:name}} type={{:type}} {{if placeholder}}placeholder={{:placeholder}}{{/if}} {{if maxlength}} maxlength={{:maxlength}}{{/if}} class="form-control input-md" required=""/>
+        {{/if}}
+        
+        </div>
+      </div>
+    </script>
+    
+    <script id="alertTmpl" type="text/x-jsrender">
+      <button id="buttonAlertDismiss" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <div class="alert alert-{{:type}}" role="alert">{{:info}}</div>
+    </script>
+    
+    
+    
     <!-- cr Framework -->
+    <script src="asset/js/framework/util.js"></script>
     <script src="asset/js/framework/cr.js"></script>
     <script src="asset/js/framework/settings.js"></script>
+    <script src="asset/js/framework/application.js"></script>
+    <script src="asset/js/framework/alert.js"></script>
     <script src="asset/js/framework/event_target.js"></script>
     <script src="asset/js/framework/model.js"></script>
     <script src="asset/js/framework/pager.js"></script>
@@ -129,6 +167,7 @@
     <script src="asset/js/bootstrap-datepicker.js"></script>
     
     <!-- Views -->
+    <script src="asset/js/front_models.js"></script>
     <script src="asset/js/createMemberViewModel.js"></script>
     <!-- /Views -->
   </body> 
