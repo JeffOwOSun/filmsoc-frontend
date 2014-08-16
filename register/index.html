@@ -59,7 +59,10 @@
     
     <!-- Bootstrap-datepicker -->
     <link href="asset/css/datepicker.css" rel="stylesheet">
-
+    <!-- Bootstrap3-dialog 
+    <link href="asset/bootstrap3-dialog/css/bootstrap-dialog.css" rel="stylesheet">
+    -->
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -81,46 +84,26 @@
         <div id="inputs"></div>
 
         <!-- Button -->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="buttonSubmit"></label>
-          <div class="col-md-4">
-            <button id="buttonSubmit" name="buttonSubmit" class="btn btn-default">Submit</button>
+        <div class="form-group "></div>
+        <div class="col-md-4"></div>
+          <div class="form-group text-center col-md-4">
+            <button id="buttonReset" name="buttonReset" class="btn btn-danger">Reset</button>
+          
+          
+            <button type="submit" id="buttonSubmit" name="buttonSubmit" class="btn btn-default">Submit</button>
           </div>
         </div>
 
         </fieldset>
       </form>
     </div>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div id="modalContent">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <script id="modalTmpl" type="text/x-jsrender">
-      <div id="alertWrapper"></div>
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title">{{:title}}</h4>
-      </div>
-      <div class="modal-body container-fluid">
+    <script id="userConfirmTmpl" type="text/x-jsrender">
         {{for formData}}
         <div class="row">
           <label class="col-md-4 control-label" >{{:name}}</label>  
           <div class="col-md-4">{{:value}}</div>
         </div>
         {{/for}}
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button id={{:primaryButton.id}} type="button" class="btn btn-primary">{{:primaryButton.text}}</button>
-      </div>
     </script>
     
     <script id="inputTmpl" type="text/x-jsrender">
@@ -128,7 +111,7 @@
         <label class="col-md-4 control-label" for={{:id}}>{{:label}}</label>  
         <div class="col-md-4">
         {{if isSelect}}
-        <select id="member_type" name="member_type" class="form-control">
+        <select id={{:id}} name={{:name}} class="form-control">
           {{for options}}
           <option value={{:value}}>{{:text}}</option>
           {{/for}}
@@ -140,12 +123,6 @@
         </div>
       </div>
     </script>
-    
-    <script id="alertTmpl" type="text/x-jsrender">
-      <button id="buttonAlertDismiss" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <div class="alert alert-{{:type}}" role="alert">{{:info}}</div>
-    </script>
-    
     
     
     <!-- cr Framework -->
@@ -165,6 +142,8 @@
     <script src="asset/js/bootstrap.js"></script>
     <!-- Bootstrap-datepicker -->
     <script src="asset/js/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap3-dialog -->
+    <script src="asset/bootstrap3-dialog/js/bootstrap-dialog.js"></script>
     
     <!-- Views -->
     <script src="asset/js/front_models.js"></script>

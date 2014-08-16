@@ -1,6 +1,8 @@
 cr.define('cr.view.createMember',function(){
     var inputTemplate = $.templates("#inputTmpl");
-    var modalTemplate = $.templates("#modalTmpl");
+
+    //Define several parameters for the jsRender templating engine.
+    //Actual webpage is generated based on this array.
 
     var inputs = [
         {
@@ -62,13 +64,23 @@ cr.define('cr.view.createMember',function(){
         },
     ]
     
-    //Should be called upon render.
+    //used to reset the Input values
+    function resetInputs(){
+        $('form').find("#itsc, #student_id, #mobile").val("");
+        $("#member_type").val("Full");
+        $("#member_type").change();
+    }
+
+    //Should be called upon load of the view.
+    //Change to other names later.
     function initialize(){
+        //render the inputs and replace the placeholder innerHTML with the rendered data
         $("#inputs").html(inputTemplate.render(inputs));
+        //Initialize the datepicker
         $('#expire_at').datepicker({
             format: 'yyyy-mm-dd',
         });
-        $("#member_type").change(function(elem){
+        $("#member_type").change(function(){
             var offset={
                 year:0,
                 month:0,
@@ -99,24 +111,45 @@ cr.define('cr.view.createMember',function(){
         //triggers once to fill the date text box
         $("#member_type").change()
         
+        //Reset button click handler
+        $("#buttonReset").click(function(){
+            resetInputs();
+            return false;
+        });
+
         $("form").submit(function(){
             //formArray is for rendering modalTemplate.
             var formArray = $(this).serializeArray();
-            $("#modalContent").html(modalTemplate.render({
-                title: "Please Confirm the Info Below.",
+            var content = $.templates("#userConfirmTmpl").render({
                 formData: formArray,
-                primaryButton:{
-                    id: "buttonConfirmSubmit",
-                    text: "Submit",
-                },
-            }));
-            $("#buttonConfirmSubmit").click(function(){
-                //formObj is for sending.
-                var formObj = $("form").serializeObject();
-                cr.model.User.post(formObj);
-            });
-            $('#myModal').modal()
-            //prevent default;
+            })
+            //Show Confirmation dialog.
+            var confirmDialog = new BootstrapDialog({
+                title: "Please Confirm the Info Below",
+                buttons:[{
+                    label: "Cancel",
+                    cssClass: 'btn-default',
+                    action: function(dialogRef){
+                        dialogRef.close();
+                    }
+                },{
+                    label: "Submit",
+                    cssClass: 'btn-primary',
+                    action: function(dialogRef){
+                        //formObj is for sending.
+                        var formObj = $("form").serializeObject();
+                        cr.model.User.post(formObj);
+                        dialogRef.close();
+                    },
+
+                }],
+            })
+            confirmDialog.realize();
+            confirmDialog.getModalBody().html(content);
+            confirmDialog.open();
+            
+            
+            //prevent default GET style request.
             return false;
         });
     }
@@ -126,7 +159,6 @@ cr.define('cr.view.createMember',function(){
     }
 })
 
-
-cr.view.createMember.initialize();
+$(document).ready(cr.view.createMember.initialize);
 
 

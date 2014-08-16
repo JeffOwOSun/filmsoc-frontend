@@ -18,7 +18,10 @@ cr.define('cr.model', function() {
       Exco = new cr.BaseModel('exco'),
       SiteSettings = new cr.BaseModel('sitesettings'),
       OneSentence = new cr.BaseModel('onesentence');
-
+/**
+ * Define which fileds should the model keep when fetching data from the backend server
+ */
+ 
   File.fields = [
     'id',
     'name',

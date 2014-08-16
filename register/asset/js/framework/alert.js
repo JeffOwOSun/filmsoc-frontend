@@ -6,14 +6,14 @@ cr.define('cr.ui', function() {
   var alertTimeout = null;
   
   function showAlert(text, type, opt_delay) {
-    var alertTemplate = $.templates("#alertTmpl");
-    var alertWrapper = $("#alertWrapper");
-    alertWrapper.html(alertTemplate.render({
-        type:type,
-        info:text,
-    }));
+
+    var dialogInstance = new BootstrapDialog({
+        message: '<div class="alert alert-'+type+'" role="alert">'+text+'</div>',
+    });
+    dialogInstance.realize()
+    dialogInstance.getModalHeader().hide();
+    dialogInstance.getModalFooter().hide();
     
-    var buttonDismiss= $("#buttonAlertDismiss");
     var delay = opt_delay || 5000;
     
     function delayHide(){
@@ -22,21 +22,20 @@ cr.define('cr.ui', function() {
     }
   
     function show() {
+
+        dialogInstance.open();
         delayHide();
     }
 
     function hide() {
         window.clearTimeout(alertTimeout);
-        buttonDismiss.click();
+        //check if user already closes the dialog by hand.
+        if (dialogInstance){
+            dialogInstance.close()
+        }
     }
 
     
-    alertWrapper.mouseover(show);
-    alertWrapper.mouseout(delayHide);
-    buttonDismiss.focus(show);
-    buttonDismiss.blur(delayHide);
-    // Enable tabbing to the link now that it is shown.
-    buttonDismiss.tabIndex = 0;
 
     show();
   }
