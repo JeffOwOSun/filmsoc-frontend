@@ -16,6 +16,8 @@ cr.define('cr', function() {
         });
         this.data = {};
         this.fields = [];
+        //acces History keeps the id's of past requests of this specific model.
+        //used 
         this.accessHistory = [];
     }
 
@@ -146,32 +148,27 @@ cr.define('cr', function() {
          * @param {Object} data The data to update
          */
         update: function(data) {
-            if (!this.data){
-                this.data = ko.mapping.fromJS(this.filter(data));
-                this.accessHistory.push = this.data.id();
-            } else {
-                ko.mapping.fromJS(this.filter(data),this.data);
-                this.accessHistory.push = this.data.id()
-            }
+            this.data = this.filter(data);
+            this.accessHistory.push = this.data.id;
         },
 
         /**
-         * Get the data using id. May use data in cache if not dirty.
+         * Get the data using id.
          * @param {integer} id The id of the data
          * @param {Function} callback The callback to call after retrieve data.
          */
         get: function(id, callback) {
-            if (this.data && this.data.id()==id) {
+            if (this.data && this.data.id==id) {
                 if (callback) {
                     callback(this.data);
                 }
             } else {
                 //retrieve it
-                var r = new APIRequest(this, 'GET', '/' + id + '/', this.data);
+                var r = new APIRequest(this, 'GET', '/' + id + '/', true);
                 r.onload = (function(e) {
                     this.update(e.recObj);
                     if (callback) {
-                        callback(deepCopy(this.data.data));
+                        callback(deepCopy(this.data));
                     }
                 }).bind(this);
                 r.onerror = function(e) {
@@ -195,7 +192,7 @@ cr.define('cr', function() {
                     this.update(e.recObj);
                 }
                 if (callback) {
-                    callback(deepCopy(this.data.data));
+                    callback(deepCopy(this.data));
                 }
             }).bind(this);
             r.onerror = function(e) {
@@ -231,7 +228,7 @@ cr.define('cr', function() {
         remove: function(id, callback) {
             var r = new APIRequest(this, 'DELETE', '/' + id + '/');
             r.onload = (function(e) {
-                if (this.data.id()==e.recObj.id) {
+                if (this.data.id==e.recObj.id) {
                     
                     //remove from history all the ids that are equal to this.data.id;
                    
