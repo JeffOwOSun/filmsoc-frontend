@@ -159,7 +159,6 @@ cr.define('cr.ui', function() {
     $('multiuse-button1').setAttribute('hidden', 'true');
     $('multiuse-button2').setAttribute('hidden', 'true');
     $('multiuse-button3').setAttribute('hidden', 'true');
-    $('multiuse-button4').setAttribute('hidden', 'true');
     if (overlay.eventTracker) {
       overlay.eventTracker.removeAll();
     }
