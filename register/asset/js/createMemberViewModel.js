@@ -138,7 +138,9 @@ cr.define('cr.view.createMember',function(){
                     action: function(dialogRef){
                         //formObj is for sending.
                         var formObj = $("form").serializeObject();
-                        cr.model.User.post(formObj);
+                        cr.model.User.post(formObj,function(obj){
+                            cr.ui.showAlert("Welcome, "+obj.full_name+"!","success");
+                        });
                         dialogRef.close();
                     },
 
