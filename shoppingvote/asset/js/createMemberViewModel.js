@@ -159,6 +159,6 @@ cr.define('cr.view.createMember',function(){
     }
 })
 
-$(document).on('authload',cr.view.createMember.initialize);
+$(document).ready(cr.view.createMember.initialize);
 
 
