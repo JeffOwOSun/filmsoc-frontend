@@ -245,12 +245,9 @@ cr.define('cr.view.liba', function() {
     cr.model.Disk.get(id, function(obj) {
       var form = cr.ui.template.render_template('admin/disk_edit.html', {disk: obj, cn: cn(obj)});
       content.appendChild(form);
-
-      //When the disk is a Draft
       if (obj.avail_type === 'Draft') {
-        //deal with button1
         var button1 = $('multiuse-button1');
-        button1.textContent = "Publish as Available";
+        button1.textContent = "Publish";
         button1.removeAttribute('hidden');
         overlay.eventTracker.add(button1, 'click', function() {
           cr.ui.showLoading();
@@ -271,37 +268,6 @@ cr.define('cr.view.liba', function() {
             return;
           }
           payload['avail_type'] = 'Available';
-          cr.model.Disk.put(id, payload, true, function() {
-            cr.ui.hideLoading();
-            cr.dispatchSimpleEvent(overlay, 'cancelOverlay');
-            history.go();
-            cr.ui.showNotification('Saved', 'dismiss');
-          });
-        });
-
-        //deal with button4
-        var button4 = $('multiuse-button4');
-        button4.textContent = "Publish as ShoppingVoting";
-        button4.removeAttribute('hidden');
-        overlay.eventTracker.add(button4, 'click', function() {
-          cr.ui.showLoading();
-          var payload = Application.collectForm(content);
-          if (payload['cover_url'] === 'uploading') {
-            alertOverlay.setValues(
-              'Warning',
-              'Cover is still uploading',
-              'OK',
-              null,
-              function() {
-                cr.dispatchSimpleEvent($('alertOverlay'), 'cancelOverlay');
-              },
-              null
-            );
-            cr.ui.hideLoading();
-            cr.ui.overlay.showOverlay($('alertOverlay'));
-            return;
-          }
-          payload['avail_type'] = 'ShoppingVoting';
           cr.model.Disk.put(id, payload, true, function() {
             cr.ui.hideLoading();
             cr.dispatchSimpleEvent(overlay, 'cancelOverlay');
@@ -531,7 +497,7 @@ cr.define('cr.view.liba', function() {
    */
   function liba_list(query) {
     var page = query.page || 1,
-        type_filter = query.type_filter ? query.type_filter.split(',') : ['Draft', 'Available', 'Borrowed', 'Reserved', 'OnDelivery', 'ReservedCounter', 'Voting', 'Onshow', 'ShoppingVoting'],
+        type_filter = query.type_filter ? query.type_filter.split(',') : ['Draft', 'Available', 'Borrowed', 'Reserved', 'OnDelivery', 'ReservedCounter', 'Voting', 'Onshow'],
         skeleton = cr.ui.template.render_template("admin/liba_list.html", {filter: type_filter});
     cr.ui.replaceContent(skeleton);
     //Load data
