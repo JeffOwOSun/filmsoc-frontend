@@ -72,14 +72,14 @@ cr.define('cr.view.shopping',function(){
             cr.ui.showLoading();
             var payload = Application.collectForm(content);
             payload['state']='Draft';
-            payload['film_1']=payload['film_1'.substr(1);
-            payload['film_2']=payload['film_2'.substr(1);
-            payload['film_3']=payload['film_3'.substr(1);
-            payload['film_4']=payload['film_4'.substr(1);
-            payload['film_5']=payload['film_5'.substr(1);
-            payload['film_6']=payload['film_6'.substr(1);
-            payload['film_7']=payload['film_7'.substr(1);
-            payload['film_8']=payload['film_8'.substr(1);
+            payload['film_1']=payload['film_1'].substr(1);
+            payload['film_2']=payload['film_2'].substr(1);
+            payload['film_3']=payload['film_3'].substr(1);
+            payload['film_4']=payload['film_4'].substr(1);
+            payload['film_5']=payload['film_5'].substr(1);
+            payload['film_6']=payload['film_6'].substr(1);
+            payload['film_7']=payload['film_7'].substr(1);
+            payload['film_8']=payload['film_8'].substr(1);
             cr.model.Shopping.post(payload,function(){
                 cr.ui.hideLoading();
                 cr.dispatchSimpleEvent(overlay, 'cancelOverlay');
@@ -92,14 +92,14 @@ cr.define('cr.view.shopping',function(){
             cr.ui.showLoading();
             var payload = Application.collectForm(content);
             payload['state']='Ready';
-            payload['film_1']=payload['film_1'.substr(1);
-            payload['film_2']=payload['film_2'.substr(1);
-            payload['film_3']=payload['film_3'.substr(1);
-            payload['film_4']=payload['film_4'.substr(1);
-            payload['film_5']=payload['film_5'.substr(1);
-            payload['film_6']=payload['film_6'.substr(1);
-            payload['film_7']=payload['film_7'.substr(1);
-            payload['film_8']=payload['film_8'.substr(1);
+            payload['film_1']=payload['film_1'].substr(1);
+            payload['film_2']=payload['film_2'].substr(1);
+            payload['film_3']=payload['film_3'].substr(1);
+            payload['film_4']=payload['film_4'].substr(1);
+            payload['film_5']=payload['film_5'].substr(1);
+            payload['film_6']=payload['film_6'].substr(1);
+            payload['film_7']=payload['film_7'].substr(1);
+            payload['film_8']=payload['film_8'].substr(1);
             cr.model.Shopping.post(payload,function(){
                 cr.ui.hideLoading();
                 cr.dispatchSimpleEvent(overlay, 'cancelOverlay');
@@ -187,12 +187,11 @@ cr.define('cr.view.shopping',function(){
                     cr.ui.hideLoading();
                     history.go();
                     cr.ui.showNotification('Started Voting','dismiss');
-                }),
+                });
             },
             function(){
                 cr.dispatchSimpleEvent($('alertOverlay'), 'cancelOverlay');
-            },
-        );
+            });
         cr.ui.overlay.showOverlay($('alertOverlay'));
     }
 
@@ -209,12 +208,11 @@ cr.define('cr.view.shopping',function(){
                     cr.ui.hideLoading();
                     history.go();
                     cr.ui.showNotification('Deleted','dismiss');
-                }),
+                });
             },
             function(){
                 cr.dispatchSimpleEvent($('alertOverlay'), 'cancelOverlay');
-            },
-        );
+            });
         cr.ui.overlay.showOverlay($('alertOverlay'));
 
     }
