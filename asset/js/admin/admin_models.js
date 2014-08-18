@@ -252,6 +252,7 @@ cr.define('cr.model', function() {
     Log: Log,
     Disk: Disk,
     RegularFilmShow: RegularFilmShow,
+    Shopping: Shopping,
     PreviewShowTicket: PreviewShowTicket,
     DiskReview: DiskReview,
     News: News,
@@ -267,6 +268,7 @@ cr.define('cr.model', function() {
 cr.model.User.setup(true);
 cr.model.Disk.setup(true);
 cr.model.RegularFilmShow.setup(true);
+cr.model.Shopping.setup(true);
 cr.model.PreviewShowTicket.setup(true);
 cr.model.News.setup(true);
 cr.model.Document.setup(true);
