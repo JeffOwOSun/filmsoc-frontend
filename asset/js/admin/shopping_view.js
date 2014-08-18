@@ -302,7 +302,7 @@ cr.define('cr.view.shopping',function(){
             }
             footer.querySelector('.centerhub > span').textContent = this.page + '/' + this.total;
             setTimeout(function(){
-                list_containter.classList.remove("content-loading");
+                list_container.classList.remove("content-loading");
             }, 100);
         }
         function generateURL() {
