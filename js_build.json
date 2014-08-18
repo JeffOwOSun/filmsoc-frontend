@@ -12,7 +12,7 @@
 			"admin/onesentence_view.js", "admin/settings_view.js", "admin/rfs_view.js",
 			"admin/ticket_view.js", "admin/document_view.js", "admin/sponsor_view.js",
 			"admin/news_view.js", "admin/colorpicker.min.js", "admin/exco_view.js",
-			"rotate.js", "admin/publication_view.js"
+			"rotate.js", "admin/publication_view.js" , "admin/shopping_view.js"
 		],
 		"asset/js/application.min.js": [
 			"util.js", "event_tracker.js", "cr.js", "event_target.js",
