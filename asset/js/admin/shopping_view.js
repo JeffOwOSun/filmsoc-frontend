@@ -67,7 +67,7 @@ cr.define('cr.view.shopping',function(){
         cr.ui.overlay.showOverlay(overlay);
         //TODO: create the template
         var form = cr.ui.template.render_template('admin/shopping_create.html');
-        content.appendChild(from);
+        content.appendChild(form);
         overlay.eventTracker.add(button1,'click', function(){
             cr.ui.showLoading();
             var payload = Application.collectForm(content);

@@ -134,8 +134,6 @@ cr.define('cr.view.liba', function() {
     button2.removeAttribute('hidden');
     button3.textContent = "Cancel";
     button3.removeAttribute('hidden');
-    button4.textContent = "Save For Shopping Vote";
-    button4.removeAttribute('hidden');
     overlay.eventTracker.add(button3, 'click', function() {
       cr.dispatchSimpleEvent(overlay, 'cancelOverlay');
     });
@@ -187,32 +185,6 @@ cr.define('cr.view.liba', function() {
         return;
       }
       payload['avail_type'] = 'Available';
-      cr.model.Disk.post(payload, function() {
-        cr.ui.hideLoading();
-        cr.dispatchSimpleEvent(overlay, 'cancelOverlay');
-        history.go();
-        cr.ui.showNotification('Saved', 'dismiss');
-      });
-    });
-    overlay.eventTracker.add(button4, 'click', function() {
-      cr.ui.showLoading();
-      var payload = Application.collectForm(content);
-      if (payload['cover_url'] === 'uploading') {
-        alertOverlay.setValues(
-          'Warning',
-          'Cover is still uploading',
-          'OK',
-          null,
-          function() {
-            cr.dispatchSimpleEvent($('alertOverlay'), 'cancelOverlay');
-          },
-          null
-        );
-        cr.ui.hideLoading();
-        cr.ui.overlay.showOverlay($('alertOverlay'));
-        return;
-      }
-      payload['avail_type'] = 'ShoppingVoting';
       cr.model.Disk.post(payload, function() {
         cr.ui.hideLoading();
         cr.dispatchSimpleEvent(overlay, 'cancelOverlay');
