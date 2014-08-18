@@ -1,0 +1,79 @@
+<div id="shopping-edit-form" class="page-form">
+	<div>
+		<label>
+			<span>Film 1:</span>
+			<input type="text" name="film_1" spellcheck="false" autocomplete="off" maxlength="5" {{shopping.state==='Draft'?'':'disabled'}} placeholder="Call Number" value="{{cn(shopping.film_1)|attr}}">
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>Film 2:</span>
+			<input type="text" name="film_2" spellcheck="false" autocomplete="off" maxlength="5" {{shopping.state==='Draft'?'':'disabled'}} placeholder="Call Number" value="{{cn(shopping.film_2)|attr}}">
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>Film 3:</span>
+			<input type="text" name="film_3" spellcheck="false" autocomplete="off" maxlength="5" {{shopping.state==='Draft'?'':'disabled'}} placeholder="Call Number" value="{{cn(shopping.film_3)|attr}}">
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>Film 4:</span>
+			<input type="text" name="film_4" spellcheck="false" autocomplete="off" maxlength="5" {{shopping.state==='Draft'?'':'disabled'}} placeholder="Call Number" value="{{cn(shopping.film_4)|attr}}">
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>Film 5:</span>
+			<input type="text" name="film_5" spellcheck="false" autocomplete="off" maxlength="5" {{shopping.state==='Draft'?'':'disabled'}} placeholder="Call Number" value="{{cn(shopping.film_5)|attr}}">
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>Film 6:</span>
+			<input type="text" name="film_6" spellcheck="false" autocomplete="off" maxlength="5" {{shopping.state==='Draft'?'':'disabled'}} placeholder="Call Number" value="{{cn(shopping.film_6)|attr}}">
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>Film 7:</span>
+			<input type="text" name="film_7" spellcheck="false" autocomplete="off" maxlength="5" {{shopping.state==='Draft'?'':'disabled'}} placeholder="Call Number" value="{{cn(shopping.film_7)|attr}}">
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>Film 8:</span>
+			<input type="text" name="film_8" spellcheck="false" autocomplete="off" maxlength="5" {{shopping.state==='Draft'?'':'disabled'}} placeholder="Call Number" value="{{cn(shopping.film_8)|attr}}">
+		</label>
+	</div>
+	<div class="nocell">
+		<label>
+			<div>Remarks:</div>
+			<textarea name="remarks" placeholder="Remarks of this Regular Film Show..." rows="5">{{shopping.remarks|pre}}</textarea>
+		</label>
+	</div>
+	<div>
+		<label>
+			<span>State:</span>
+			<select name="state">
+				<option value="Draft" {{shopping.state=='Draft'?'selected':''|safe}}>Draft</option>
+				<option value="Ready" {{shopping.state=='Ready'?'selected':''|safe}}>Ready</option>
+				<option value="Voting" {{shopping.state=='Voting'?'selected':''|safe}}>Voting</option>
+				<option value="Passed" {{shopping.state=='Passed'?'selected':''|safe}}>Passed</option>
+			</select>
+		</label>
+	</div>
+	<div class="info">
+		<h3>Miscellaneous Show Info</h3>
+		<div>ID: {{shopping.id}}</div>
+		<div>Film 1 Vote: {{shopping.vote_cnt_1}}</div>
+		<div>Film 2 Vote: {{shopping.vote_cnt_2}}</div>
+		<div>Film 3 Vote: {{shopping.vote_cnt_3}}</div>
+		<div>Film 4 Vote: {{shopping.vote_cnt_4}}</div>
+		<div>Film 5 Vote: {{shopping.vote_cnt_5}}</div>
+		<div>Film 6 Vote: {{shopping.vote_cnt_6}}</div>
+		<div>Film 7 Vote: {{shopping.vote_cnt_7}}</div>
+		<div>Film 8 Vote: {{shopping.vote_cnt_8}}</div>
+	</div>
+</div>

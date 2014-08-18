@@ -25,10 +25,7 @@ cr.define('cr.view.shopping',function(){
         })
         cr.ui.template.register("admin/shopping_edit.html");
         cr.ui.template.register("admin/shopping_create.html");
-        cr.ui.template.register("admin/shopping_start_voting.html", function(param){
-            //place initialization functions to the template here.
-            //will be executed when the template is rendered.
-        });
+        
     }
 
     /**
@@ -57,7 +54,7 @@ cr.define('cr.view.shopping',function(){
             button2 = $('multiuse-button2'),
             button3 = $('multiuse-button3');
         cr.ui.resetMultiuse();
-        title.textContent = 'Create New Shopping';
+        title.textContent = 'Create New Shopping. CallNumers must refer to Drafts';
         button1.textContent = "Save as Draft";
         button1.removeAttribute('hidden');
         button2.textContent = "Publish as Ready";
@@ -283,7 +280,7 @@ cr.define('cr.view.shopping',function(){
                 //TODO: add types to backend_models
             }, cr.model.Shopping.types);
         });
-        skeleton.querySelector('#shopping-create-show').addEventListener('click',create_shopping);
+        skeleton.querySelector('#shopping-create-shopping').addEventListener('click',create_shopping);
         
         function load_obj(obj_list){
             cr.ui.removeLoading(content);

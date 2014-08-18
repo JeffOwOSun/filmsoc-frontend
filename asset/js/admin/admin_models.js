@@ -98,6 +98,31 @@ cr.define('cr.model', function() {
 
   RegularFilmShow.types = ['create', 'edit', 'delete', 'vote', 'entry'];
 
+  Shopping.fields = [
+    'id',
+    'state',
+    'film_1',
+    'film_2',
+    'film_3',
+    'film_4',
+    'film_5',
+    'film_6',
+    'film_7',
+    'film_8',
+    'vote_cnt_1',
+    'vote_cnt_2',
+    'vote_cnt_3',
+    'vote_cnt_4',
+    'vote_cnt_5',
+    'vote_cnt_6',
+    'vote_cnt_7',
+    'vote_cnt_8',
+    'create_log',
+    'remarks',
+  ];
+
+  Shopping.types = ['create', 'edit', 'delete', 'vote',];
+
   PreviewShowTicket.fields = [
     'id',
     'state',

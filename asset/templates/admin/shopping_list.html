@@ -1,0 +1,111 @@
+<div class="shopping-view">
+    <header>
+        <h1>Shopping Management</h1>
+        <div class="controls weak-rtl">
+            <button id="shopping-create-shopping">Create Shopping</button>
+            <button id="shopping-view-log">View Logs</button>
+        </div>
+        <div class="controls">
+            <span>Shopping State:</span>
+            <div class="filter">
+                <label>
+                    <input id="shopping-filter-draft" type="checkbox" filter="Draft" {{filter.indexOf('Draft') === -1?'':'checked'|safe}}>
+                    <span>Draft</span>
+                </label>
+            </div>
+            <div class="filter">
+                <label>
+                    <input id="shopping-filter-ready" type="checkbox" filter="Ready" {{filter.indexOf('Ready') === -1?'':'checked'|safe}}>
+                    <span>Ready</span>
+                </label>
+            </div>
+            <div class="filter">
+                <label>
+                    <input id="shopping-filter-voting" type="checkbox" filter="Voting" {{filter.indexOf('Voting') === -1?'':'checked'|safe}}>
+                    <span>Voting</span>
+                </label>
+            </div>
+            <div class="filter">
+                <label>
+                    <input id="shopping-filter-passed" type="checkbox" filter="Passed" {{filter.indexOf('Passed') === -1?'':'checked'|safe}}>
+                    <span>Passed</span>
+                </label>
+            </div>
+        </div>
+        <div class="controls">
+            <div class="column-header">
+                <div class="vote-column column">
+                    <div class="static-text">Vote</div>
+                </div>
+                <div class="film-column column">
+                    <div class="static-text">Film_1</div>
+                </div>
+                <div class="vote-column column">
+                    <div class="static-text">Vote</div>
+                </div>
+                <div class="film-column column">
+                    <div class="static-text">Film_2</div>
+                </div>
+                <div class="vote-column column">
+                    <div class="static-text">Vote</div>
+                </div>
+                <div class="film-column column">
+                    <div class="static-text">Film_3</div>
+                </div>
+                <div class="vote-column column">
+                    <div class="static-text">Vote</div>
+                </div>
+                <div class="film-column column">
+                    <div class="static-text">Film_4</div>
+                </div>
+                <div class="vote-column column">
+                    <div class="static-text">Vote</div>
+                </div>
+                <div class="film-column column">
+                    <div class="static-text">Film_5</div>
+                </div>
+                <div class="vote-column column">
+                    <div class="static-text">Vote</div>
+                </div>
+                <div class="film-column column">
+                    <div class="static-text">Film_6</div>
+                </div>
+                <div class="vote-column column">
+                    <div class="static-text">Vote</div>
+                </div>
+                <div class="film-column column">
+                    <div class="static-text">Film_7</div>
+                </div>
+                <div class="vote-column column">
+                    <div class="static-text">Vote</div>
+                </div>
+                <div class="film-column column">
+                    <div class="static-text">Film_8</div>
+                </div>                
+                <div class="state-column column">
+                    <div class="static-text">State</div>
+                </div>
+                <div class="state-column column">
+                    <div class="static-text">Total</div>
+                </div>                
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <list id="shopping-list-list" role="list" tabindex="2">
+        </list>
+    </div>
+    <footer>
+        <div>
+            <div class="lefthub">
+                <button id="page-prev" class="link-button">&lt;&lt;Prev</button>
+            </div>
+            <div class="centerhub">
+                <span>&nbsp;</span>
+            </div>
+            <div class="righthub">
+                <button id="page-next" class="link-button">Next&gt;&gt;</button>
+            </div>
+        </div>
+    </footer>
+</div>

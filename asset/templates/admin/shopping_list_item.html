@@ -1,0 +1,64 @@
+<div role="listitem">
+    <div>
+        <div class="vote-column column">
+            <div class="static-text">{{shopping.vote_cnt_1}}</div>
+        </div>
+        <div class="film-column column">
+            <div class="static-text">{{shopping.film_1.title_en}}/{{shopping.film_1.title_ch}}</div>
+        </div>
+        <div class="vote-column column">
+            <div class="static-text">{{shopping.vote_cnt_2}}</div>
+        </div>
+        <div class="film-column column">
+            <div class="static-text">{{shopping.film_2.title_en}}/{{shopping.film_2.title_ch}}</div>
+        </div>
+        <div class="vote-column column">
+            <div class="static-text">{{shopping.vote_cnt_3}}</div>
+        </div>
+        <div class="film-column column">
+            <div class="static-text">{{shopping.film_3.title_en}}/{{shopping.film_3.title_ch}}</div>
+        </div>
+        <div class="vote-column column">
+            <div class="static-text">{{shopping.vote_cnt_4}}</div>
+        </div>
+        <div class="film-column column">
+            <div class="static-text">{{shopping.film_4.title_en}}/{{shopping.film_4.title_ch}}</div>
+        </div>
+        <div class="vote-column column">
+            <div class="static-text">{{shopping.vote_cnt_5}}</div>
+        </div>
+        <div class="film-column column">
+            <div class="static-text">{{shopping.film_5.title_en}}/{{shopping.film_5.title_ch}}</div>
+        </div>
+        <div class="vote-column column">
+            <div class="static-text">{{shopping.vote_cnt_6}}</div>
+        </div>
+        <div class="film-column column">
+            <div class="static-text">{{shopping.film_6.title_en}}/{{shopping.film_6.title_ch}}</div>
+        </div>
+        <div class="vote-column column">
+            <div class="static-text">{{shopping.vote_cnt_7}}</div>
+        </div>
+        <div class="film-column column">
+            <div class="static-text">{{shopping.film_7.title_en}}/{{shopping.film_7.title_ch}}</div>
+        </div>
+        <div class="vote-column column">
+            <div class="static-text">{{shopping.vote_cnt_8}}</div>
+        </div>
+        <div class="film-column column">
+            <div class="static-text">{{shopping.film_8.title_en}}/{{shopping.film_8.title_ch}}</div>
+        </div>
+        <div class="state-column column">
+            <div class="static-text">{{shopping.state}}</div>
+        </div>
+        <div class="total-column column">
+            <div class="static-text">{{shopping.vote_cnt_8+shopping.vote_cnt_7+shopping.vote_cnt_6+shopping.vote_cnt_5+shopping.vote_cnt_4+shopping.vote_cnt_3+shopping.vote_cnt_2+shopping.vote_cnt_1}}</div>
+        </div>
+        <div class="column-button">
+            <button class="custom-appearance list-inline-button" control="edit">Edit</button>
+            <button class="custom-appearance list-inline-button" control="start_voting" {{shopping.state=='Pending'?'':'hidden'|safe}}>start_voting</button>
+            <button class="custom-appearance list-inline-button" control="viewlog">View Reated Log</button>
+            <button class="custom-appearance list-inline-button" control="delete">Delete</button>
+        </div>
+    </div>
+</div>
