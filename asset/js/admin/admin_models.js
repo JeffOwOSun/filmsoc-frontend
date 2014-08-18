@@ -10,6 +10,7 @@ cr.define('cr.model', function() {
       Log = new cr.BaseModel('log'),
       Disk = new cr.BaseModel('disk'),
       RegularFilmShow = new cr.BaseModel('regularfilmshow'),
+      Shopping = new cr.BaseModel('shopping'),
       PreviewShowTicket = new cr.BaseModel('previewshowticket'),
       DiskReview = new cr.BaseModel('diskreview'),
       News = new cr.BaseModel('news'),
