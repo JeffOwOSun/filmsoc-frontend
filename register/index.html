@@ -28,35 +28,7 @@
     </script>
     
     <!-- Bootstrap -->
-    <link href="asset/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Multi-Modal -->
-    <script>
-        $(document).ready(function() {           
-           $('.modal').on('hidden.bs.modal', function(event) {
-               $(this).removeClass('fv-modal-stack');
-               $('body').data('fv_open_modals', $('body').data('fv_open_modals') - 1);
-           });
-           $('.modal').on('shown.bs.modal', function(event) {
-               // keep track of the number of open modals
-               if (typeof($('body').data('fv_open_modals')) == 'undefined') {
-                   $('body').data('fv_open_modals', 0);
-               }
-
-               // if the z-index of this modal has been set, ignore.
-               if ($(this).hasClass('fv-modal-stack')) {
-                   return;
-               }
-               $(this).addClass('fv-modal-stack');
-               $('body').data('fv_open_modals', $('body').data('fv_open_modals') + 1);
-               $(this).css('z-index', 1040 + (10 * $('body').data('fv_open_modals')));
-               $('.modal-backdrop').not('.fv-modal-stack')
-                   .css('z-index', 1039 + (10 * $('body').data('fv_open_modals')));
-               $('.modal-backdrop').not('fv-modal-stack')
-                   .addClass('fv-modal-stack');
-           });
-        });
-    </script>
-    
+    <link href="asset/css/bootstrap.min.css" rel="stylesheet">  
     <!-- Bootstrap-datepicker -->
     <link href="asset/css/datepicker.css" rel="stylesheet">
     <!-- Bootstrap3-dialog 
@@ -137,17 +109,17 @@
     <!-- /cr Framework -->
     
     <!-- jsview -->
-    <script src="asset/js/jsviews.js"></script>
+    <script src="asset/js/dependency/jsviews.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="asset/js/bootstrap.js"></script>
+    <script src="asset/js/dependency/bootstrap.js"></script>
     <!-- Bootstrap-datepicker -->
-    <script src="asset/js/bootstrap-datepicker.js"></script>
+    <script src="asset/js/dependency/bootstrap-datepicker.js"></script>
     <!-- Bootstrap3-dialog -->
     <script src="asset/bootstrap3-dialog/js/bootstrap-dialog.js"></script>
     
     <!-- Views -->
-    <script src="asset/js/front_models.js"></script>
-    <script src="asset/js/createMemberViewModel.js"></script>
+    <script src="asset/js/models/front_models.js"></script>
+    <script src="asset/js/viewModels/createMemberViewModel.js"></script>
     <!-- /Views -->
   </body> 
 </html>
