@@ -128,7 +128,7 @@ cr.define('cr.view.shopping',function(){
         cr.ui.overlay.showOverlay(overlay);
         cr.model.Shopping.get(id,function(obj){
             //TODO: create the template
-            var form = cr.ui.template.render_template('admin/shopping_edit.htmnl', {shopping: obj, cn: cn});
+            var form = cr.ui.template.render_template('admin/shopping_edit.html', {shopping: obj, cn: cn});
             content.appendChild(form);
             overlay.eventTracker.add(button2,'click',function(){
                 cr.ui.showLoading();
