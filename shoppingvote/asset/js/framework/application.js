@@ -11,11 +11,7 @@ cr.define('Application', function() {
     function initialization() {
         //cr.ui.showLoading();
 
-        routeManager.pushState=function(hash){
-            location.hash = hash;
-        }
-
-        $(document).on("ready",function(){
+        $(document).on("authload",function(){
             routeManager.run();
         });
 
@@ -92,9 +88,9 @@ cr.define('Application', function() {
 
     }
 
-    var routeManager = Sammy(function() {
-        this.get("/~su_film/shoppingvoting", function(){
-            this.redirect("#!shopping");
+    var routeManager = Sammy(function(){
+        this.get("/~su_film/shoppingvote/", function(){
+            this.redirect("#!shopping/");
         });
     });
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bootstrap 101 Template</title>
+  <title>Shopping Vote</title>
   
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -41,61 +41,102 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style>
+    .cover-wrapper{
+      width:100%;
+      display:inline-block;
+      position:relative;
+    }
+    .cover-wrapper:after{
+      padding-top:100%;
+      display:block;
+      content:'';
+    }
+    .cover-image{
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
+      position:absolute;
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-position:center center;
+    }
+    .shopping-item{
+      position:relative;
+    }
+    .vote-bar-wrapper{
+      position:absolute;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
+    }
+    .vote-bar{
+      position:absolute;
+      width:100%;
+      bottom:0;
+      background-color: #E4FFFD;
+    }
+  </style>
   </head>
   <body>
 
     <div class="container-fluid">
-      <div id="content-wrapper" class="col-md-8">
+      <div id="content-wrapper" class="col-md-offset-2 col-md-8">
         
       </div>
     </div>
 
     <script id="shoppingTmpl" type="text/x-jsrender">
-      <h3>{{:title}}</h3>
+      <h1>{{:title}}</h1>
       <hr/>
-      {{if disks.length()>0}}
-        <h4>Shopping Status:&nbsp;<em>{{:state}}</em></h4>
+      {{if disks.length>0}}
+        <h2>Shopping Status:&nbsp;<em>{{:state}}</em></h4>
         {{for disks}}
-          <div class="row">
-            <div class="col-md-12">
-              <div class="col-md-4">
-                <a href="#shopping/detail/{{:index}}/">
-                  <img src={{if cover_url}}{{:cr.settings.uploadBase+cover_url}}{{else}}{{:"http://ihome.ust.hk/~su_film/asset/css/question.png"}}{{/if}} alt="">
-                </a>
-              </div>
-              <div class="col-md-8">
-                <a href={{if state=="Voting"}}{{:"#shopping/vote/"+index+"/"}}{{else}}{{:"#"}}{{/if}}>
-                  <div class="text-center">{{:votes}}</div>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow={{: total? votes/total : 0}} aria-valuemin="0" aria-valuemax="100" style="width: {{: total? votes/total : 0}}%;">
-                      <span class="sr-only">{{: total? votes/total : 0}}% Complete</span>
-                    </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="shopping-item thumbnail">
+                <div class="vote-bar-wrapper">
+                  <div class="vote-bar" style="height:{{:percentage}}%">
                   </div>
-                </a>
+                </div>
+                <a href="#!shopping/detail/{{:index}}/" class="cover-wrapper">
+                  <div class="cover-image" style="background-image:url({{:cover_url}})"></div>
+                </a>                
+                <div class="caption" style="position:relative">
+                  <h4>{{:title_en+"/"+title_ch}}</h4>
+                  <p><div class="text-center">{{:votes+" Votes"}}</div></p>
+                </div>
+                {{if ~root.state=='Voting' && ~root.user==true}}
+                  <div class="text-center" style="position:relative">
+                    <a href="#!shopping/vote/{{:index}}/" class="btn btn-primary" role="button" sytle="position:absolute">Vote</a>
+                  </div>
+                {{/if}}
               </div>
-            </div>  
-          </div>
+            </div>
         {{/for}}
       {{else}}
-        <div>
-          There are currently no shopping.
+        <div class="text-center">
+          <h2>There are currently no shopping.</h2>
         </div>
       {{/if}}
     </script>
 
     <script id="diskTmpl" type="text/x-jsrender">
       <div class="row">
-        <div class="col-md-6">
-          <img src={{:cr.settings.upload_base+cover_url}} class="img-responsive" alt=""/>
+        <div class="col-md-6 wrapper">
+          <img src="{{:cover_url}}" class="img-responsive" alt=""/>
         </div>
         <div class="col-md-6">
           {{for itemArray}}
-            <label class="col-md-4">{{:name}}</label>
-            <div class="col-md-8">{{if href}}<a href={{:href}}>{{/if}}{{:content}}{{if href}}</a>{{/if}}</div>
+            <div class="row">
+              <label class="col-md-6">{{:name+":"}}</label>
+              <div class="col-md-6">{{if href}}<a href="{{:href}}">{{/if}}{{:content}}{{if href}}</a>{{/if}}</div>
+            </div>
           {{/for}}
-
         </div>
       </div>
+      <h4>Description</h4>
       <div class="row">
         <div class="col-md-6">
           {{:desc_en}}
@@ -187,14 +228,13 @@
     <script src="asset/js/framework/event_target.js"></script>
     <script src="asset/js/framework/model.js"></script>
     <script src="asset/js/framework/pager.js"></script>
-    <script src="asset/js/framework/routeManager.js"></script>
     <!-- /cr Framework -->
     
 
     
     <!-- Views -->
     <script src="asset/js/models/front_models.js"></script>
-    <script src="asset/js/viewModels/createMemberViewModel.js"></script>
+    <script src="asset/js/viewModels/shoppingViewModel.js"></script>
     <!-- /Views -->
   </body> 
 </html>
