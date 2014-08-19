@@ -28,35 +28,7 @@
   </script>
   
   <!-- Bootstrap -->
-  <link href="asset/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Multi-Modal -->
-  <script>
-    $(document).ready(function() {           
-       $('.modal').on('hidden.bs.modal', function(event) {
-         $(this).removeClass('fv-modal-stack');
-         $('body').data('fv_open_modals', $('body').data('fv_open_modals') - 1);
-       });
-       $('.modal').on('shown.bs.modal', function(event) {
-         // keep track of the number of open modals
-         if (typeof($('body').data('fv_open_modals')) == 'undefined') {
-           $('body').data('fv_open_modals', 0);
-         }
-
-         // if the z-index of this modal has been set, ignore.
-         if ($(this).hasClass('fv-modal-stack')) {
-           return;
-         }
-         $(this).addClass('fv-modal-stack');
-         $('body').data('fv_open_modals', $('body').data('fv_open_modals') + 1);
-         $(this).css('z-index', 1040 + (10 * $('body').data('fv_open_modals')));
-         $('.modal-backdrop').not('.fv-modal-stack')
-           .css('z-index', 1039 + (10 * $('body').data('fv_open_modals')));
-         $('.modal-backdrop').not('fv-modal-stack')
-           .addClass('fv-modal-stack');
-       });
-    });
-  </script>
-  
+  <link href="asset/css/bootstrap.min.css" rel="stylesheet">  
   <!-- Bootstrap-datepicker -->
   <link href="asset/css/datepicker.css" rel="stylesheet">
   <!-- Bootstrap3-dialog 
@@ -73,32 +45,68 @@
   <body>
 
     <div class="container-fluid">
-      
+      <div id="content-wrapper" class="col-md-8">
+        
+      </div>
     </div>
 
     <script id="shoppingTmpl" type="text/x-jsrender">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div class="col-md-4">
-            <a href="#">
-              <img src="" alt="">
-            </a>
-          </div>
-          <div class="col-md-8">
-            <a href="#">
-              <div class="text-center"></div>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                  <span class="sr-only">60% Complete</span>
-                </div>
+      <h3>{{:title}}</h3>
+      <hr/>
+      {{if disks.length()>0}}
+        <h4>Shopping Status:&nbsp;<em>{{:state}}</em></h4>
+        {{for disks}}
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-md-4">
+                <a href="#shopping/detail/{{:index}}/">
+                  <img src={{if cover_url}}{{:cr.settings.uploadBase+cover_url}}{{else}}{{:"http://ihome.ust.hk/~su_film/asset/css/question.png"}}{{/if}} alt="">
+                </a>
               </div>
-            </a>
+              <div class="col-md-8">
+                <a href={{if state=="Voting"}}{{:"#shopping/vote/"+index+"/"}}{{else}}{{:"#"}}{{/if}}>
+                  <div class="text-center">{{:votes}}</div>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow={{: total? votes/total : 0}} aria-valuemin="0" aria-valuemax="100" style="width: {{: total? votes/total : 0}}%;">
+                      <span class="sr-only">{{: total? votes/total : 0}}% Complete</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>  
           </div>
-        </div>  
+        {{/for}}
+      {{else}}
+        <div>
+          There are currently no shopping.
+        </div>
+      {{/if}}
+    </script>
+
+    <script id="diskTmpl" type="text/x-jsrender">
+      <div class="row">
+        <div class="col-md-6">
+          <img src={{:cr.settings.upload_base+cover_url}} class="img-responsive" alt=""/>
+        </div>
+        <div class="col-md-6">
+          {{for itemArray}}
+            <label class="col-md-4">{{:name}}</label>
+            <div class="col-md-8">{{if href}}<a href={{:href}}>{{/if}}{{:content}}{{if href}}</a>{{/if}}</div>
+          {{/for}}
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          {{:desc_en}}
+        </div>
+        <div class="col-md-6">
+          {{:desc_ch}}
+        </div>
       </div>
     </script>
 
-
+    
     <script id="navTmpl" type="text/x-jsrender">
       <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
@@ -157,7 +165,19 @@
       </div>
     </script>
     
-    
+    <!-- dependencies -->
+    <!-- jsview -->
+    <script src="asset/js/dependency/jsviews.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="asset/js/dependency/bootstrap.js"></script>
+    <!-- Bootstrap-datepicker -->
+    <script src="asset/js/dependency/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap3-dialog -->
+    <script src="asset/bootstrap3-dialog/js/bootstrap-dialog.js"></script>
+    <!-- Sammy.js -->
+    <script src="asset/js/dependency/sammy-latest.min.js"></script>
+
+
     <!-- cr Framework -->
     <script src="asset/js/framework/util.js"></script>
     <script src="asset/js/framework/cr.js"></script>
@@ -167,20 +187,14 @@
     <script src="asset/js/framework/event_target.js"></script>
     <script src="asset/js/framework/model.js"></script>
     <script src="asset/js/framework/pager.js"></script>
+    <script src="asset/js/framework/routeManager.js"></script>
     <!-- /cr Framework -->
     
-    <!-- jsview -->
-    <script src="asset/js/jsviews.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="asset/js/bootstrap.js"></script>
-    <!-- Bootstrap-datepicker -->
-    <script src="asset/js/bootstrap-datepicker.js"></script>
-    <!-- Bootstrap3-dialog -->
-    <script src="asset/bootstrap3-dialog/js/bootstrap-dialog.js"></script>
+
     
     <!-- Views -->
-    <script src="asset/js/front_models.js"></script>
-    <script src="asset/js/createMemberViewModel.js"></script>
+    <script src="asset/js/models/front_models.js"></script>
+    <script src="asset/js/viewModels/createMemberViewModel.js"></script>
     <!-- /Views -->
   </body> 
 </html>

@@ -18,6 +18,7 @@ cr.define("cr.settings", function(){
     logoutUrl: 'http://dml003.resnet.ust.hk:49000/film/member/logout/',
     
     resourceBase: 'http://ihome.ust.hk/~su_film/asset/',
+    uploadBase: 'http://ihome.ust.hk/~su_film/upload/',
     scribdID: 'pub-51573345608846754358',
     }
 })

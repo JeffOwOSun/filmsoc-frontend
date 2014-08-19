@@ -7,12 +7,9 @@ cr.define('cr.ui', function() {
   
   function showAlert(text, type, opt_delay) {
 
-    var dialogInstance = new BootstrapDialog({
-        message: '<div class="alert alert-'+type+'" role="alert">'+text+'</div>',
-    });
+    var dialogInstance = new BootstrapDialog();
     dialogInstance.realize()
-    dialogInstance.getModalHeader().hide();
-    dialogInstance.getModalFooter().hide();
+    dialogInstance.getModalContent().html('<div class="alert alert-'+type+'" role="alert" style="margin-bottom: 0">'+text+'</div>');
     
     var delay = opt_delay || 5000;
     
