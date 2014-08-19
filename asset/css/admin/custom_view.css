@@ -87,6 +87,24 @@
   width: 10%;
 }
 
+/* Shopping */
+#main-container .shopping-view .content {
+  margin-top: 188px;
+}
+
+#main-container .shopping-view .film-column{
+    width: 8%;
+    text-align: left;
+}
+#main-container .shopping-view .vote-column,
+#main-container .shopping-view .state-column {
+    width: 2%;
+}
+
+#main-container .shopping-view .vote-column {
+    text-align: right;
+}
+
 /* DVD Liba */
 #main-container .liba-list-view .content {
   margin-top: 188px;
