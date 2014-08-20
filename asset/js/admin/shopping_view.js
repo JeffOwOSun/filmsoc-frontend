@@ -20,7 +20,6 @@ cr.define('cr.view.shopping',function(){
                     id: obj.id,
                 }, cr.model.Shopping.types);
             }).bind(null,param.shopping));
-            this.querySelector('button[control="start_voting"]').addEventListener('click', start_voting_shopping.bind(null, param.shopping));
             this.querySelector('button[control="delete"]').addEventListener('click', delete_shopping.bind(null, param.shopping));
         })
         cr.ui.template.register("admin/shopping_edit.html");
@@ -172,27 +171,6 @@ cr.define('cr.view.shopping',function(){
                 });
             });
         });
-    }
-
-    function start_voting_shopping(shopping){
-        alertOverlay.setValues(
-            'Confirm Start Voting',
-            'Confirm Start Voting?',
-            'Start Voting',
-            'Cancel',
-            function(){
-                cr.dispatchSimpleEvent($('alertOverlay'),'cancelOverlay');
-                cr.ui.showLoading();
-                cr.model.Shopping.put(shopping.id, {state: 'Voting'}, true, function(){
-                    cr.ui.hideLoading();
-                    history.go();
-                    cr.ui.showNotification('Started Voting','dismiss');
-                });
-            },
-            function(){
-                cr.dispatchSimpleEvent($('alertOverlay'), 'cancelOverlay');
-            });
-        cr.ui.overlay.showOverlay($('alertOverlay'));
     }
 
     function delete_shopping(shopping){
