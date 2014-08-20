@@ -138,11 +138,17 @@ cr.define('cr.view.createMember',function(){
                     cssClass: 'btn-primary',
                     action: function(dialogRef){
                         //formObj is for sending.
+                        dialogRef.close();
+                        var sendingDialog = new BootstrapDialog({closable:false});
+                        sendingDialog.realize();
+                        sendingDialog.getModalContent().html('<div class="alert alert-info role="alert" style="margin-bottom: 0">Sending...</div>');
+                        sendingDialog.open();
                         var formObj = $("form").serializeObject();
                         cr.model.User.post(formObj,function(obj){
+                        	sendingDialog.close();
                             cr.ui.showAlert("Welcome, "+obj.full_name+"!","success");
                         });
-                        dialogRef.close();
+                        
                     },
 
                 }],
