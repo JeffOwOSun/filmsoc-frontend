@@ -8,7 +8,7 @@ def main():
     '''
     For debugging. Flagging it True will prevent obfuscation
     '''
-    debugging=True
+    debugging=False
     
     '''
     opens the json configuration file
@@ -47,7 +47,7 @@ def main():
         print "Processing for %s" % k
         print "Using: %s" % ' '.join(command) #' '.join(command), is to join the command list using ' ' as separators
         sys.stdout.flush()
-        p = subprocess.Popen(command, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+        p = subprocess.Popen(' '.join(command), stdin=subprocess.PIPE, stderr=subprocess.PIPE)
 
         lines = [0]
         cur_line = 0
