@@ -56,9 +56,8 @@
         </div>
         <div class="column-button">
             <button class="custom-appearance list-inline-button" control="edit">Edit</button>
-            <button class="custom-appearance list-inline-button" control="start_voting" {{shopping.state=='Pending'?'':'hidden'|safe}}>start_voting</button>
             <button class="custom-appearance list-inline-button" control="viewlog">View Reated Log</button>
-            <button class="custom-appearance list-inline-button" control="delete">Delete</button>
+            <button class="custom-appearance list-inline-button" control="delete"{{shopping.state=='Passed'||shopping.state=='Draft'?'':'hidden'|safe}}>Delete</button>
         </div>
     </div>
 </div>
