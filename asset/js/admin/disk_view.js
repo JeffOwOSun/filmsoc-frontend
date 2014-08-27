@@ -250,37 +250,6 @@ cr.define('cr.view.liba', function() {
             cr.ui.showNotification('Saved', 'dismiss');
           });
         });
-
-        //deal with button4
-        var button4 = $('multiuse-button4');
-        button4.textContent = "Publish as ShoppingVoting";
-        button4.removeAttribute('hidden');
-        overlay.eventTracker.add(button4, 'click', function() {
-          cr.ui.showLoading();
-          var payload = Application.collectForm(content);
-          if (payload['cover_url'] === 'uploading') {
-            alertOverlay.setValues(
-              'Warning',
-              'Cover is still uploading',
-              'OK',
-              null,
-              function() {
-                cr.dispatchSimpleEvent($('alertOverlay'), 'cancelOverlay');
-              },
-              null
-            );
-            cr.ui.hideLoading();
-            cr.ui.overlay.showOverlay($('alertOverlay'));
-            return;
-          }
-          payload['avail_type'] = 'ShoppingVoting';
-          cr.model.Disk.put(id, payload, true, function() {
-            cr.ui.hideLoading();
-            cr.dispatchSimpleEvent(overlay, 'cancelOverlay');
-            history.go();
-            cr.ui.showNotification('Saved', 'dismiss');
-          });
-        });
       }
       overlay.eventTracker.add(button2, 'click', function() {
         cr.ui.showLoading();
