@@ -86,26 +86,63 @@ cr.define('cr.view.createMember',function(){
                 year:0,
                 month:0,
             }
+
+            var springMonth=1,
+                fallMonth=8;
+
+            var dateObj = new Date();
+
             switch ($(this).val()){
                 case "Full":
                     offset.year=4;
+                    //memebers joining before June will end after *effectively* 3.5 years
+                    //e.g. member at 2014-5-20 will end at 2017-9-1 
+                    if (dateObj.getMonth()<5 && offset.year!=0){
+                        offset.year-=1;
+                    }
+                    dateObj.setYear(dateObj.getFullYear()+offset.year);
+                    dateObj.setMonth(8);
+                    dateObj.setDate(1);
                     break;
                 case "OneSem":
-                    offset.month=6;
+                    dateObj.setYear((dateObj.getMonth()<fallMonth && dateObj.getMonth()>= springMonth) ? dateObj.getFullYear() : dateObj.getFullYear()+1);
+                    dateObj.setMonth((dateObj.getMonth()<fallMonth && dateObj.getMonth()>= springMonth) ? fallMonth : springMonth);
+                    dateObj.setDate(1);
                     break;
                 case "OneYear":
                     offset.year=1;
+                    //memebers joining before June will end after *effectively* 3.5 years
+                    //e.g. member at 2014-5-20 will end at 2017-9-1 
+                    if (dateObj.getMonth()<5 && offset.year!=0){
+                        offset.year-=1;
+                    }
+                    dateObj.setYear(dateObj.getFullYear()+offset.year);
+                    dateObj.setMonth(8);
+                    dateObj.setDate(1);
                     break;
                 case "TwoYear":
                     offset.year=2;
+                    //memebers joining before June will end after *effectively* 3.5 years
+                    //e.g. member at 2014-5-20 will end at 2017-9-1 
+                    if (dateObj.getMonth()<5 && offset.year!=0){
+                        offset.year-=1;
+                    }
+                    dateObj.setYear(dateObj.getFullYear()+offset.year);
+                    dateObj.setMonth(8);
+                    dateObj.setDate(1);
                     break;
                 case "ThreeYear":
                     offset.year=3;
+                    //memebers joining before June will end after *effectively* 3.5 years
+                    //e.g. member at 2014-5-20 will end at 2017-9-1 
+                    if (dateObj.getMonth()<5 && offset.year!=0){
+                        offset.year-=1;
+                    }
+                    dateObj.setYear(dateObj.getFullYear()+offset.year);
+                    dateObj.setMonth(8);
+                    dateObj.setDate(1);
                     break;
             }
-            var dateObj = new Date();
-            dateObj.setYear(dateObj.getFullYear()+offset.year);
-            dateObj.setMonth(dateObj.getMonth()+offset.month);
             $('#expire_at').datepicker('setValue',dateObj);
         });
         
