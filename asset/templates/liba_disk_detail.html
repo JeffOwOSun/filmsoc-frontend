@@ -24,7 +24,7 @@
 
 			<div><span class="key">Call Number:</span> {{cn}}</div>
 
-			<div><span class="key">Disk Type:</span> {{disk.disk_type==="A"?"VCD":"DVD"}}</div>
+			<div><span class="key">Disk Type:</span> {{disk.disk_type=="A"?"VCD":""}}{{disk.disk_type=="B"?"DVD":""}}{{disk.disk_type=="C"?"BD":""}}{{disk.disk_type=="D"?"Drive":""}}</div>
 
 			<div><span class="key">Borrowed:</span> {{disk.borrow_cnt}} time<span {{disk.borrow_cnt>1?"":"hidden"|safe}}>s</span></div>
 

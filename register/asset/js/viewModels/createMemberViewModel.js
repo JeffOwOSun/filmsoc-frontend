@@ -176,7 +176,7 @@ cr.define('cr.view.createMember',function(){
                     action: function(dialogRef){
                         //formObj is for sending.
                         dialogRef.close();
-                        var sendingDialog = new BootstrapDialog({closable:false});
+                        var sendingDialog = new BootstrapDialog({closable:true});
                         sendingDialog.realize();
                         sendingDialog.getModalContent().html('<div class="alert alert-info role="alert" style="margin-bottom: 0">Sending...</div>');
                         sendingDialog.open();
