@@ -104,6 +104,17 @@ cr.define('cr.view.shopping',function(){
                 renderData.state=object.state;
                 renderData.title="Shopping Vote";
                 renderData.user=cr.user?true:false;
+                //divide disks into two parts
+                var i=0;
+                renderData.disks_1=[];
+                for (i=0; i<4; i++){
+                    renderData.disks_1.push(renderData.disks[i]);
+                }
+                renderData.disks_2=[];
+                for (i=4; i<8; i++){
+                    renderData.disks_2.push(renderData.disks[i]);
+                }
+
                 //our renderData object is ready.
 
                 //render template

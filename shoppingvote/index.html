@@ -76,7 +76,7 @@
       position:absolute;
       width:100%;
       bottom:0;
-      background-color: #E4FFFD;
+      background-color: #529AFC;
     }
   </style>
   </head>
@@ -93,8 +93,9 @@
       <hr/>
       {{if disks.length>0}}
         <h2>Shopping Status:&nbsp;<em>{{:state}}</em></h4>
-        {{for disks}}
-            <div class="col-sm-6 col-md-6">
+        <div class="col-sm-6 col_md-6">
+        {{for disks_1}}
+            <div class="col-sm-12 col-md-12">
               <div class="shopping-item thumbnail">
                 <div class="vote-bar-wrapper">
                   <div class="vote-bar" style="height:{{:percentage}}%">
@@ -115,6 +116,31 @@
               </div>
             </div>
         {{/for}}
+        </div>
+        <div class="col-sm-6 col_md-6">
+        {{for disks_2}}
+            <div class="col-sm-12 col-md-12">
+              <div class="shopping-item thumbnail">
+                <div class="vote-bar-wrapper">
+                  <div class="vote-bar" style="height:{{:percentage}}%">
+                  </div>
+                </div>
+                <a href="#!shopping/detail/{{:index}}/" class="cover-wrapper">
+                  <div class="cover-image" style="background-image:url({{:cover_url}})"></div>
+                </a>                
+                <div class="caption" style="position:relative">
+                  <h4>{{:title_en+"/"+title_ch}}</h4>
+                  <p><div class="text-center">{{:votes+" Votes"}}</div></p>
+                </div>
+                {{if ~root.state=='Voting' && ~root.user==true}}
+                  <div class="text-center" style="position:relative">
+                    <a href="#!shopping/vote/{{:index}}/" class="btn btn-primary" role="button" sytle="position:absolute">Vote</a>
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+        {{/for}}
+        <div>
       {{else}}
         <div class="text-center">
           <h2>There are currently no shopping.</h2>
