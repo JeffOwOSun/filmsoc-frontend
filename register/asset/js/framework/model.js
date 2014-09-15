@@ -156,8 +156,9 @@ cr.define('cr', function() {
          * Get the data using id.
          * @param {integer} id The id of the data
          * @param {Function} callback The callback to call after retrieve data.
+         * @param {Function} errcallback Function to call when error occurs.
          */
-        get: function(id, callback) {
+        get: function(id, callback, errcallback) {
             if (this.data && this.data.id==id) {
                 if (callback) {
                     callback(this.data);
@@ -172,6 +173,9 @@ cr.define('cr', function() {
                     }
                 }).bind(this);
                 r.onerror = function(e) {
+                    if (errcallback) {
+                        errcallback(deepCopy(e.recObj));
+                    }
                     cr.errorHandler(e);
                 };
                 r.send();
@@ -184,8 +188,9 @@ cr.define('cr', function() {
          * @param {Object} data Data to put, in plain object form. Should contain only the fields that need update.
          * @param {boolean} update If true, update the cache based on return value
          * @param {Function} callback Function to call after successful access
+         * @param {Function} errcallback Function to call when error occurs.
          */
-        put: function(id, data, update, callback) {
+        put: function(id, data, update, callback, errcallback) {
             var r = new APIRequest(this, 'PUT', '/' + id + '/');
             r.onload = (function(e) {
                 if (update) {
@@ -196,6 +201,9 @@ cr.define('cr', function() {
                 }
             }).bind(this);
             r.onerror = function(e) {
+                if (errcallback) {
+                    errcallback(deepCopy(e.recObj));
+                }
                 cr.errorHandler(e);
             };
             r.sendJSON(data);
@@ -205,8 +213,9 @@ cr.define('cr', function() {
          * create a model.
          * @param {Object} data Data to post
          * @param {Function} callback Function to call after successful access
+         * @param {Function} errcallback Function to call when error occurs.
          */
-        post: function(data, callback) {
+        post: function(data, callback, errcallback) {
             var r = new APIRequest(this, 'POST', '/');
             r.onload = (function(e) {
                 this.update(e.recObj);
@@ -215,6 +224,9 @@ cr.define('cr', function() {
                 }
             }).bind(this);
             r.onerror = function(e) {
+                if (errcallback) {
+                    errcallback(deepCopy(e.recObj));
+                }
                 cr.errorHandler(e);
             };
             r.sendJSON(data);
@@ -224,8 +236,9 @@ cr.define('cr', function() {
          * delete a model.
          * @param {integer} id ID of the instance to delete
          * @param {Function} callback Function to call after successful access
+         * @param {Function} errcallback Function to call when error occurs.
          */
-        remove: function(id, callback) {
+        remove: function(id, callback, errcallback) {
             var r = new APIRequest(this, 'DELETE', '/' + id + '/');
             r.onload = (function(e) {
                 if (this.data.id==e.recObj.id) {
@@ -241,6 +254,9 @@ cr.define('cr', function() {
                 }
             }).bind(this);
             r.onerror = function(e) {
+                if (errcallback) {
+                    errcallback(deepCopy(e.recObj));
+                }
                 cr.errorHandler(e);
             };
             r.send();
