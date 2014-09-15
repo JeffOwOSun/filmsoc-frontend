@@ -20,7 +20,6 @@ cr.define('cr.view.shopping',function(){
                     id: obj.id,
                 }, cr.model.Shopping.types);
             }).bind(null,param.shopping));
-            this.querySelector('button[control="start_voting"]').addEventListener('click', start_voting_shopping.bind(null, param.shopping));
             this.querySelector('button[control="delete"]').addEventListener('click', delete_shopping.bind(null, param.shopping));
         })
         cr.ui.template.register("admin/shopping_edit.html");
