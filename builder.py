@@ -9,7 +9,6 @@ def main():
     For debugging. Flagging it True will prevent obfuscation
     '''
     debugging=True
-    
     '''
     opens the json configuration file
     json.loads turns json into a dictionary
@@ -27,7 +26,7 @@ def main():
 
     for k, v in config["jobs"].iteritems():
         '''
-        k is a key, which is the name of the target js file, 
+        k is a key, which is the name of the target js file,
         and v is a value, which will be a list here, since it's denoted using "[]"
         map() applies the anonymous function denoted by keyword lambda on every term inside v
         the result is a v list where each item is appended at the beginning with a path
@@ -43,7 +42,6 @@ def main():
             command[5] = "--nomunge"
         else:
             command[5] = ""
-        
         print "Processing for %s" % k
         print "Using: %s" % ' '.join(command) #' '.join(command), is to join the command list using ' ' as separators
         sys.stdout.flush()
